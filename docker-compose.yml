@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    image: smart-faq-assistant:latest
+    container_name: smart_faq_chatbot
+    ports:
+      - "5001:5001"
+    volumes:
+      - .:/app
+    environment:
+      - FLASK_ENV=development
+      - SECRET_KEY=docker-local-dev-secret-key-182903810293
+      - DATABASE_URL=sqlite:////app/smart_faq.db
+    restart: always

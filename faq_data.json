@@ -1,0 +1,262 @@
+[
+  {
+    "question": "What is Artificial Intelligence (AI)?",
+    "answer": "Artificial Intelligence refers to the simulation of human intelligence in machines that are programmed to think like humans and mimic their actions, such as learning, reasoning, and problem-solving.",
+    "category": "Artificial Intelligence"
+  },
+  {
+    "question": "What is the difference between Strong AI and Weak AI?",
+    "answer": "Weak AI (Narrow AI) is designed and trained for a particular task (like virtual assistants), whereas Strong AI (General AI) possesses generalized cognitive abilities so that when presented with an unfamiliar task, it can find a solution.",
+    "category": "Artificial Intelligence"
+  },
+  {
+    "question": "What is Turing Test?",
+    "answer": "The Turing Test, proposed by Alan Turing, is a method of inquiry in artificial intelligence for determining whether or not a computer is capable of thinking like a human being.",
+    "category": "Artificial Intelligence"
+  },
+  {
+    "question": "What are the main branches of AI?",
+    "answer": "The main branches of AI include Machine Learning, Deep Learning, Natural Language Processing (NLP), Robotics, Expert Systems, Fuzzy Logic, and Computer Vision.",
+    "category": "Artificial Intelligence"
+  },
+  {
+    "question": "What is Cognitive Computing?",
+    "answer": "Cognitive computing refers to technology platforms that, broadly speaking, are based on the scientific disciplines of artificial intelligence and signal processing to mimic human brain function.",
+    "category": "Artificial Intelligence"
+  },
+  {
+    "question": "How is AI used in daily life?",
+    "answer": "AI is used in daily life through search engine recommendations, voice assistants (Siri, Alexa), spam filters, social media personalization, self-driving features, and fraud detection systems.",
+    "category": "Artificial Intelligence"
+  },
+  {
+    "question": "What is Machine Learning?",
+    "answer": "Machine Learning is a branch of AI that enables systems to learn from data, identify patterns, and make decisions with minimal human intervention.",
+    "category": "Machine Learning"
+  },
+  {
+    "question": "What is the difference between Supervised and Unsupervised Learning?",
+    "answer": "Supervised learning uses labeled training data to learn mapping functions, while unsupervised learning deals with unlabeled data, aiming to find hidden structures or clusters within the data.",
+    "category": "Machine Learning"
+  },
+  {
+    "question": "What is Reinforcement Learning?",
+    "answer": "Reinforcement Learning is a type of machine learning where an agent learns to behave in an environment by performing actions and receiving rewards or penalties in return.",
+    "category": "Machine Learning"
+  },
+  {
+    "question": "What is Overfitting in Machine Learning?",
+    "answer": "Overfitting occurs when a model learns the detail and noise in the training data to the extent that it negatively impacts the performance of the model on new data.",
+    "category": "Machine Learning"
+  },
+  {
+    "question": "What is Underfitting and how do you fix it?",
+    "answer": "Underfitting happens when a model is too simple to capture the underlying pattern of the data. It can be fixed by increasing model complexity, training longer, or using more features.",
+    "category": "Machine Learning"
+  },
+  {
+    "question": "What is the difference between classification and regression?",
+    "answer": "Classification is a supervised learning task where the output is a category (discrete label), whereas regression is a task where the output is a continuous numerical value.",
+    "category": "Machine Learning"
+  },
+  {
+    "question": "What is Bias-Variance tradeoff?",
+    "answer": "The bias-variance tradeoff is the property of a model that the error in parameter estimation is the sum of bias (error from erroneous assumptions) and variance (error from sensitivity to training fluctuations).",
+    "category": "Machine Learning"
+  },
+  {
+    "question": "What is Deep Learning?",
+    "answer": "Deep Learning is a subset of machine learning that is based on artificial neural networks with multiple layers (hence 'deep') which attempt to simulate the behavior of the human brain to learn from large amounts of data.",
+    "category": "Deep Learning"
+  },
+  {
+    "question": "What is an Artificial Neural Network (ANN)?",
+    "answer": "An Artificial Neural Network is a computational model inspired by the structure of biological neural networks, consisting of interconnected nodes (neurons) organized in layers: input, hidden, and output.",
+    "category": "Deep Learning"
+  },
+  {
+    "question": "What is a Convolutional Neural Network (CNN)?",
+    "answer": "A Convolutional Neural Network is a class of deep neural networks most commonly applied to analyzing visual imagery, characterized by its use of convolutional layers to extract spatial features.",
+    "category": "Deep Learning"
+  },
+  {
+    "question": "What is a Recurrent Neural Network (RNN)?",
+    "answer": "A Recurrent Neural Network is a class of artificial neural networks where connections between nodes form a directed graph along a temporal sequence, allowing it to exhibit temporal dynamic behavior for sequential data.",
+    "category": "Deep Learning"
+  },
+  {
+    "question": "What is an Activation Function in Neural Networks?",
+    "answer": "An activation function defines the output of a neuron given an input or set of inputs, introducing non-linearity into the network to help it learn complex patterns. Examples include ReLU, Sigmoid, and Tanh.",
+    "category": "Deep Learning"
+  },
+  {
+    "question": "What is Backpropagation?",
+    "answer": "Backpropagation is a widely used algorithm for training artificial neural networks, where the gradient of the loss function is calculated with respect to the weights by propagating the error backward through the network.",
+    "category": "Deep Learning"
+  },
+  {
+    "question": "What is Transfer Learning?",
+    "answer": "Transfer learning is a machine learning technique where a model developed for a task is reused as the starting point for a model on a second, related task, saving training time and resources.",
+    "category": "Deep Learning"
+  },
+  {
+    "question": "Why is Python the preferred language for AI and Data Science?",
+    "answer": "Python is preferred due to its simplicity, readability, vast ecosystem of specialized libraries (NumPy, Pandas, Scikit-learn, PyTorch, TensorFlow), strong community support, and multi-platform compatibility.",
+    "category": "Python Programming"
+  },
+  {
+    "question": "What is the difference between lists and tuples in Python?",
+    "answer": "Lists are mutable, meaning their elements can be modified after creation, and are defined using square brackets `[]`. Tuples are immutable, meaning they cannot be changed, and are defined using parentheses `()`.",
+    "category": "Python Programming"
+  },
+  {
+    "question": "What are Python list comprehensions?",
+    "answer": "List comprehensions provide a concise way to create lists. They consist of brackets containing an expression followed by a `for` clause, then zero or more `for` or `if` clauses.",
+    "category": "Python Programming"
+  },
+  {
+    "question": "What is the difference between `__init__` and `__new__` in Python?",
+    "answer": "`__new__` is the method called to create a new instance of a class (constructor), while `__init__` is called to initialize the newly created instance (initializer).",
+    "category": "Python Programming"
+  },
+  {
+    "question": "What is a decorator in Python?",
+    "answer": "A decorator is a design pattern in Python that allows you to modify the behavior of a function or class. Decorators wrap another function, extending its behavior without permanently modifying it.",
+    "category": "Python Programming"
+  },
+  {
+    "question": "What is the difference between global and local variables in Python?",
+    "answer": "Global variables are defined outside any function and can be accessed anywhere in the module. Local variables are defined inside a function and are only accessible within that function's scope.",
+    "category": "Python Programming"
+  },
+  {
+    "question": "What are generators in Python?",
+    "answer": "Generators are functions that return an iterator using the `yield` keyword. They generate values on-the-fly (lazy evaluation), which makes them highly memory-efficient for handling large datasets.",
+    "category": "Python Programming"
+  },
+  {
+    "question": "What is Data Science?",
+    "answer": "Data Science is an interdisciplinary field that uses scientific methods, processes, algorithms, and systems to extract knowledge and insights from structured and unstructured data.",
+    "category": "Data Science"
+  },
+  {
+    "question": "What is the difference between Data Science and Data Analytics?",
+    "answer": "Data Science is a broader field focused on finding new questions, building predictive models, and developing algorithms. Data analytics focuses on answering specific questions by examining existing historical datasets.",
+    "category": "Data Science"
+  },
+  {
+    "question": "What is the lifecycle of a Data Science project?",
+    "answer": "The lifecycle consists of Business Understanding, Data Acquisition and Understanding, Data Preparation (Cleaning), Modeling, Evaluation, Deployment, and Customer Acceptance.",
+    "category": "Data Science"
+  },
+  {
+    "question": "What is Exploratory Data Analysis (EDA)?",
+    "answer": "EDA is an approach to analyzing datasets to summarize their main characteristics, often using visual methods. It helps check assumptions, detect outliers, and identify patterns before modeling.",
+    "category": "Data Science"
+  },
+  {
+    "question": "What is the difference between covariance and correlation?",
+    "answer": "Covariance indicates the direction of the linear relationship between variables, whereas correlation measures both the strength and direction of the linear relationship on a standardized scale from -1 to 1.",
+    "category": "Data Science"
+  },
+  {
+    "question": "How do you handle missing data in a dataset?",
+    "answer": "Missing data can be handled by deleting rows or columns (if minimal), imputing values (using mean, median, mode, or predictive models), or using algorithms that naturally handle missing values.",
+    "category": "Data Science"
+  },
+  {
+    "question": "What is A/B Testing?",
+    "answer": "A/B testing is a statistical hypothesis testing framework used to compare two versions of a webpage, app, or model to determine which one performs better based on user actions.",
+    "category": "Data Science"
+  },
+  {
+    "question": "What is Natural Language Processing (NLP)?",
+    "answer": "NLP is a field of AI concerned with the interactions between computers and human languages, specifically how to program computers to process and analyze large amounts of natural language data.",
+    "category": "NLP"
+  },
+  {
+    "question": "What is Tokenization in NLP?",
+    "answer": "Tokenization is the process of breaking down a text, such as a paragraph or sentence, into smaller individual units called tokens, which are usually words, subwords, or characters.",
+    "category": "NLP"
+  },
+  {
+    "question": "What is the difference between Stemming and Lemmatization?",
+    "answer": "Stemming cuts off the prefixes/suffixes of words to find their root form (often resulting in non-words), whereas lemmatization uses vocabulary and morphological analysis to return the dictionary form (lemma).",
+    "category": "NLP"
+  },
+  {
+    "question": "What is TF-IDF in text processing?",
+    "answer": "TF-IDF stands for Term Frequency-Inverse Document Frequency. It is a numerical statistic that reflects how important a word is to a document in a collection or corpus, balancing word frequency with its general commonness.",
+    "category": "NLP"
+  },
+  {
+    "question": "What are Word Embeddings?",
+    "answer": "Word embeddings are dense vector representations of words in a continuous vector space where words with similar meanings are mapped close to each other (e.g., Word2Vec, GloVe).",
+    "category": "NLP"
+  },
+  {
+    "question": "What is Named Entity Recognition (NER)?",
+    "answer": "NER is a subtask of information extraction that seeks to locate and classify named entities mentioned in unstructured text into predefined categories such as person names, organizations, locations, and dates.",
+    "category": "NLP"
+  },
+  {
+    "question": "What is the Transformer architecture?",
+    "answer": "Introduced in the 'Attention Is All You Need' paper, the Transformer is a deep learning model architecture that uses self-attention mechanisms to process sequential data in parallel, forming the backbone of modern LLMs.",
+    "category": "NLP"
+  },
+  {
+    "question": "What is Computer Vision?",
+    "answer": "Computer Vision is a field of artificial intelligence that enables computers and systems to derive meaningful information from digital images, videos, and other visual inputs, and take actions based on that information.",
+    "category": "Computer Vision"
+  },
+  {
+    "question": "What is Image Segmentation?",
+    "answer": "Image segmentation is the process of partitioning a digital image into multiple segments (sets of pixels, also known as image objects) to simplify or change the representation of an image into something more meaningful.",
+    "category": "Computer Vision"
+  },
+  {
+    "question": "What is the difference between Object Detection and Image Classification?",
+    "answer": "Image classification assigns a label to the entire image, while object detection identifies and locates multiple objects within an image, drawing bounding boxes around them and classifying each.",
+    "category": "Computer Vision"
+  },
+  {
+    "question": "What is Optical Character Recognition (OCR)?",
+    "answer": "OCR is the electronic or mechanical conversion of images of typed, handwritten, or printed text into machine-encoded text, whether from a scanned document, a photo of a document, or subtitle text superimposed on an image.",
+    "category": "Computer Vision"
+  },
+  {
+    "question": "How does Edge Detection work in image processing?",
+    "answer": "Edge detection works by identifying points in a digital image where the image brightness changes sharply or has discontinuities, often computed using gradients (e.g., Sobel or Canny filters).",
+    "category": "Computer Vision"
+  },
+  {
+    "question": "What is Generative AI?",
+    "answer": "Generative AI refers to algorithms (such as GANs, VAEs, or Transformers) that can be used to create new content, including audio, code, images, text, simulations, and videos, based on the training data.",
+    "category": "Generative AI"
+  },
+  {
+    "question": "What is a Large Language Model (LLM)?",
+    "answer": "A Large Language Model is a type of AI model trained on massive datasets of text to understand, generate, and predict human language. Examples include GPT-4, Gemini, and Claude.",
+    "category": "Generative AI"
+  },
+  {
+    "question": "What is Retrieval-Augmented Generation (RAG)?",
+    "answer": "RAG is a technique that optimizes the output of a large language model by querying an external authoritative knowledge base or vector database for context before generating the response.",
+    "category": "Generative AI"
+  },
+  {
+    "question": "What is AI Hallucination?",
+    "answer": "AI hallucination is a phenomenon where a generative AI model (particularly an LLM) generates content that is factually incorrect, nonsensical, or completely unrelated to the input prompt.",
+    "category": "Generative AI"
+  },
+  {
+    "question": "What is Prompt Engineering?",
+    "answer": "Prompt engineering is the process of structuring, refining, and optimizing text prompts to guide generative AI models (like ChatGPT) to produce accurate, high-quality, and contextually relevant outputs.",
+    "category": "Generative AI"
+  },
+  {
+    "question": "What are Generative Adversarial Networks (GANs)?",
+    "answer": "GANs are a class of machine learning frameworks designed by Ian Goodfellow, where two neural networks (a Generator and a Discriminator) contest with each other in a game to generate realistic synthetic data.",
+    "category": "Generative AI"
+  }
+]

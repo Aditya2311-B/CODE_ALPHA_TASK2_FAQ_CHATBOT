@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}403 - Forbidden{% endblock %}
+
+{% block content %}
+<div class="flex-grow flex flex-col items-center justify-center py-16 px-4 bg-gradient-to-b from-[#f8fafc] to-[#f1f5f9] dark:from-[#090d16] dark:to-[#0f172a]">
+    <div class="max-w-md w-full text-center z-10 space-y-6">
+        
+        <div class="w-20 h-20 rounded-3xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center text-3xl mx-auto border border-indigo-500/20">
+            <i class="fa-solid fa-ban"></i>
+        </div>
+
+        <h1 class="font-outfit font-extrabold text-5xl text-slate-900 dark:text-white">403</h1>
+        
+        <div class="glass-card p-6 rounded-2xl border border-slate-200/60 dark:border-slate-800/60">
+            <h3 class="font-outfit font-bold text-base text-slate-900 dark:text-white mb-2">Access Forbidden</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
+                You do not have the required permissions to view this resource. Please make sure you are logged in with correct administrative privileges.
+            </p>
+        </div>
+
+        <div>
+            <a href="{{ url_for('index') }}" class="inline-flex items-center space-x-2 px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-xs transition-all shadow-md shadow-brand-500/10">
+                <i class="fa-solid fa-user-shield"></i>
+                <span>Back to workspace</span>
+            </a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block title %}Analytics Dashboard - Smart FAQ Assistant{% endblock %}
+
+{% block extra_head %}
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="flex-grow bg-slate-50/50 dark:bg-[#090d16] py-10 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto space-y-6">
+        
+        <!-- Header -->
+        <div>
+            <h1 class="font-outfit font-extrabold text-2xl sm:text-3xl text-slate-900 dark:text-white">Analytics Overview</h1>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Monitor query activity, classification confidence levels, and trending topics.</p>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+            
+            <div class="glass-card p-5 rounded-2xl border border-slate-200/50 dark:border-slate-800/50">
+                <div class="text-[9px] uppercase font-bold text-slate-400 tracking-wider">Total Queries</div>
+                <div class="text-2xl font-extrabold text-slate-900 dark:text-white mt-1">{{ stats.total_queries }}</div>
+                <div class="text-[10px] text-slate-400 font-medium mt-1">Across all users</div>
+            </div>
+            
+            <div class="glass-card p-5 rounded-2xl border border-slate-200/50 dark:border-slate-800/50">
+                <div class="text-[9px] uppercase font-bold text-slate-400 tracking-wider">Avg Confidence</div>
+                <div class="text-2xl font-extrabold text-brand-600 dark:text-brand-400 mt-1">{{ stats.avg_confidence }}%</div>
+                <div class="text-[10px] text-slate-400 font-medium mt-1">TF-IDF Similarity Match</div>
+            </div>
+
+            <div class="glass-card p-5 rounded-2xl border border-slate-200/50 dark:border-slate-800/50">
+                <div class="text-[9px] uppercase font-bold text-slate-400 tracking-wider">Active Users</div>
+                <div class="text-2xl font-extrabold text-slate-900 dark:text-white mt-1">{{ stats.active_users }}</div>
+                <div class="text-[10px] text-slate-400 font-medium mt-1">In the last 7 days</div>
+            </div>
+
+            <div class="glass-card p-5 rounded-2xl border border-slate-200/50 dark:border-slate-800/50">
+                <div class="text-[9px] uppercase font-bold text-slate-400 tracking-wider">Indexed FAQs</div>
+                <div class="text-2xl font-extrabold text-slate-900 dark:text-white mt-1">{{ stats.total_faqs }}</div>
+                <div class="text-[10px] text-slate-400 font-medium mt-1">Knowledge base size</div>
+            </div>
+            
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- Daily activity graph -->
+            <div class="lg:col-span-2 glass-card p-6 rounded-2xl border border-slate-200/60 dark:border-slate-800/60 flex flex-col justify-between">
+                <div>
+                    <h3 class="font-outfit font-bold text-sm text-slate-900 dark:text-white mb-1">User Activity Graph</h3>
+                    <p class="text-[10px] text-slate-400 font-medium mb-4">Volume of chatbot queries received daily.</p>
+                </div>
+                <div class="h-64 relative">
+                    <canvas id="dailyChatsChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Categories distribution -->
+            <div class="lg:col-span-1 glass-card p-6 rounded-2xl border border-slate-200/60 dark:border-slate-800/60 flex flex-col justify-between">
+                <div>
+                    <h3 class="font-outfit font-bold text-sm text-slate-900 dark:text-white mb-1">Top Searched Topics</h3>
+                    <p class="text-[10px] text-slate-400 font-medium mb-4">Popular matching categories.</p>
+                </div>
+                <div class="h-64 relative flex items-center justify-center">
+                    <canvas id="topicsChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Most asked questions -->
+            <div class="lg:col-span-3 glass-card p-6 rounded-2xl border border-slate-200/60 dark:border-slate-800/60">
+                <div>
+                    <h3 class="font-outfit font-bold text-sm text-slate-900 dark:text-white mb-1">Trending Questions</h3>
+                    <p class="text-[10px] text-slate-400 font-medium mb-4">Top 5 matched FAQ database entries.</p>
+                </div>
+                <div class="h-64 relative">
+                    <canvas id="mostAskedChart"></canvas>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Embed aggregated Python stats directly as a JSON object
+    const statsData = {{ stats | tojson }};
+</script>
+<script src="{{ url_for('static', filename='js/analytics.js') }}"></script>
+{% endblock %}

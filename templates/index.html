@@ -1,0 +1,304 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if current_user.is_authenticated %}Smart FAQ Chatbot{% else %}Smart FAQ Assistant - Modern AI-Powered Knowledge Base{% endif %}
+{% endblock %}
+
+{% block content %}
+{% if not current_user.is_authenticated %}
+<!-- ==================== LANDING PAGE (Logged Out) ==================== -->
+<div class="relative flex-1 flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-b from-[#f8fafc] to-[#f1f5f9] dark:from-[#090d16] dark:to-[#0f172a]">
+    
+    <!-- Background Blur Decorative Blobs -->
+    <div class="absolute top-1/4 left-1/10 w-72 h-72 bg-brand-500/10 rounded-full blur-3xl -z-10 animate-float"></div>
+    <div class="absolute bottom-1/3 right-1/10 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl -z-10 animate-float-delayed"></div>
+
+    <div class="max-w-5xl w-full text-center z-10">
+        <!-- Hero Section -->
+        <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full border border-brand-500/20 bg-brand-500/5 text-brand-600 dark:text-brand-400 text-xs font-semibold uppercase tracking-wider mb-8 animate-pulse">
+            <i class="fa-solid fa-sparkles"></i>
+            <span>Next-Gen Intelligent FAQ Assistant</span>
+        </div>
+
+        <h1 class="font-outfit font-extrabold text-4xl sm:text-6xl tracking-tight text-slate-900 dark:text-white leading-none">
+            Instant Answers. <br class="hidden sm:inline">
+            Powered by <span class="bg-gradient-to-r from-brand-600 to-indigo-500 dark:from-brand-400 dark:to-indigo-300 bg-clip-text text-transparent">NLP & TF-IDF Similarity</span>.
+        </h1>
+        
+        <p class="mt-6 max-w-2xl mx-auto text-base sm:text-lg text-slate-600 dark:text-slate-400">
+            A production-ready SaaS application that pre-processes text, maps queries using Cosine Similarity, and returns answers with confidence scores. Includes administrative dashboards, analytics, and voice controls.
+        </p>
+
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="{{ url_for('auth.register') }}" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold shadow-lg shadow-brand-500/20 hover:shadow-brand-500/40 transform hover:-translate-y-0.5 transition-all duration-300">
+                Create Free Account
+            </a>
+            <a href="{{ url_for('auth.login') }}" class="w-full sm:w-auto px-8 py-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm hover:bg-slate-50 dark:hover:bg-slate-800/50 text-slate-700 dark:text-slate-300 font-semibold transition-all">
+                Sign In to Demo
+            </a>
+        </div>
+
+        <!-- Chatbot Illustration Card -->
+        <div class="mt-16 max-w-4xl mx-auto glass-card rounded-2xl p-4 sm:p-6 shadow-2xl relative border border-white/20 dark:border-slate-800/60">
+            <div class="flex items-center justify-between border-b border-slate-200/40 dark:border-slate-800/40 pb-4 mb-4">
+                <div class="flex items-center space-x-2">
+                    <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+                    <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                    <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                </div>
+                <div class="text-xs text-slate-400 font-semibold">chatbot_demo_interface.exe</div>
+                <div class="w-6"></div>
+            </div>
+            
+            <div class="space-y-4 text-left font-sans text-sm max-h-64 overflow-y-auto pr-2">
+                <div class="flex items-start space-x-3">
+                    <div class="w-8 h-8 rounded-lg bg-indigo-500 flex items-center justify-center text-white text-xs font-bold shrink-0">U</div>
+                    <div class="bg-slate-200/60 dark:bg-slate-800/60 p-3.5 rounded-r-xl rounded-bl-xl max-w-[80%] text-slate-700 dark:text-slate-300">
+                        What is deep learning?
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3">
+                    <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div class="bg-brand-500/10 border border-brand-500/10 p-3.5 rounded-r-xl rounded-br-xl max-w-[80%] text-slate-800 dark:text-slate-200">
+                        Deep Learning is a subset of machine learning that is based on artificial neural networks with multiple layers which attempt to simulate the behavior of the human brain to learn from large amounts of data.
+                        <div class="mt-2 text-[10px] text-brand-500 dark:text-brand-400 font-bold">
+                            <i class="fa-solid fa-gauge-high"></i> Confidence Score: 98.4%
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SaaS Features grid -->
+        <div class="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+            <div class="glass-card p-8 rounded-2xl border border-white/20 dark:border-slate-800/40 shadow-sm hover:shadow-md transition-shadow">
+                <div class="w-12 h-12 rounded-xl bg-violet-500/10 text-violet-500 flex items-center justify-center text-xl mb-6">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+                <h3 class="font-outfit font-semibold text-lg text-slate-900 dark:text-white mb-2">NLP Preprocessing Pipeline</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm">
+                    Cleans text, strips punctuation, tokenizes, filters out stop words, and lemmatizes using NLTK to maximize similarity precision.
+                </p>
+            </div>
+            
+            <div class="glass-card p-8 rounded-2xl border border-white/20 dark:border-slate-800/40 shadow-sm hover:shadow-md transition-shadow">
+                <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center text-xl mb-6">
+                    <i class="fa-solid fa-calculator"></i>
+                </div>
+                <h3 class="font-outfit font-semibold text-lg text-slate-900 dark:text-white mb-2">TF-IDF & Cosine Similarity</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm">
+                    Leverages vector space modeling to math-match questions with high speed. Shows relative keyword match highlights.
+                </p>
+            </div>
+
+            <div class="glass-card p-8 rounded-2xl border border-white/20 dark:border-slate-800/40 shadow-sm hover:shadow-md transition-shadow">
+                <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-xl mb-6">
+                    <i class="fa-solid fa-microphone-lines"></i>
+                </div>
+                <h3 class="font-outfit font-semibold text-lg text-slate-900 dark:text-white mb-2">Voice & Export Controls</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm">
+                    Hands-free voice recognition inputs and speech synthesis outputs. Includes rapid exports of chat logs to PDF or Text files.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% else %}
+<!-- ==================== CHAT INTERFACE (Logged In) ==================== -->
+<div class="flex-1 flex overflow-hidden relative">
+
+    <!-- Mobile Sidebar Backdrop -->
+    <div id="sidebar-backdrop" class="hidden fixed inset-0 bg-slate-900/40 dark:bg-black/60 backdrop-blur-sm z-20 md:hidden" onclick="toggleSidebar()"></div>
+
+    <!-- Collapsible Conversations Sidebar -->
+    <aside id="chat-sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 w-80 bg-white dark:bg-[#0c1220] border-r border-slate-200/50 dark:border-slate-800/50 flex flex-col z-30 transition-transform duration-300 ease-in-out">
+        
+        <!-- Sidebar Brand header for mobile -->
+        <div class="h-16 flex items-center justify-between px-4 border-b border-slate-200/40 dark:border-slate-800/40 md:hidden">
+            <span class="font-outfit font-bold text-lg text-slate-900 dark:text-white">Conversations</span>
+            <button onclick="toggleSidebar()" class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- Sidebar Actions -->
+        <div class="p-4 space-y-3 shrink-0">
+            <button onclick="startNewChat()" class="w-full flex items-center justify-center space-x-2.5 px-4 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold shadow-md shadow-brand-500/10 hover:shadow-brand-500/20 transform active:scale-98 transition-all">
+                <i class="fa-solid fa-plus text-sm"></i>
+                <span>New Conversation</span>
+            </button>
+
+            <!-- Search Sidebar Sessions -->
+            <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+                    <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                </span>
+                <input id="search-sessions" type="text" oninput="filterSessions()" placeholder="Search chats..." class="w-full pl-9 pr-4 py-2 text-xs rounded-xl bg-slate-100 dark:bg-slate-900/60 border-0 focus:ring-1 focus:ring-brand-500 text-slate-700 dark:text-slate-300 placeholder-slate-400">
+            </div>
+        </div>
+
+        <!-- List of Chat Sessions -->
+        <div class="flex-1 overflow-y-auto px-2 space-y-1.5" id="sessions-container">
+            <!-- Loading skeleton or populated via JS -->
+            {% if sessions %}
+                {% for session in sessions %}
+                    <div data-session-id="{{ session.id }}" class="session-row group flex items-center justify-between px-3 py-3 rounded-xl cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800/40 transition-colors text-slate-600 dark:text-slate-400">
+                        <div onclick="loadSession('{{ session.id }}')" class="flex items-center space-x-3 flex-1 min-w-0">
+                            <i class="fa-regular fa-comment text-sm shrink-0"></i>
+                            <span class="text-xs font-semibold truncate session-title">{{ session.title }}</span>
+                        </div>
+                        <div class="flex items-center space-x-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <button onclick="renameSessionPrompt('{{ session.id }}', event)" class="p-1 text-slate-400 hover:text-brand-500 text-2xs" title="Rename">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                            <button onclick="deleteSession('{{ session.id }}', event)" class="p-1 text-slate-400 hover:text-rose-500 text-2xs" title="Delete">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div id="no-sessions" class="text-center py-8 text-xs text-slate-400 font-medium">
+                    No conversations yet.
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Sidebar Footer links -->
+        <div class="p-4 border-t border-slate-200/40 dark:border-slate-800/40 space-y-2.5 shrink-0 bg-slate-50/50 dark:bg-slate-900/20">
+            <a href="{{ url_for('dashboard.home') }}" class="flex items-center space-x-3 text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-brand-500 transition-colors py-1.5 px-2 rounded-lg">
+                <i class="fa-solid fa-chart-line text-sm w-4"></i>
+                <span>FAQ CRUD Manager</span>
+            </a>
+            <a href="{{ url_for('dashboard.analytics_view') }}" class="flex items-center space-x-3 text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-brand-500 transition-colors py-1.5 px-2 rounded-lg">
+                <i class="fa-solid fa-chart-pie text-sm w-4"></i>
+                <span>Analytics Dashboard</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Chat Workspace -->
+    <section class="flex-1 flex flex-col min-w-0 bg-[#f8fafc] dark:bg-[#090d16]">
+        
+        <!-- Chat Control Header -->
+        <div class="h-16 border-b border-slate-200/40 dark:border-slate-800/40 flex items-center justify-between px-4 sm:px-6 bg-white/40 dark:bg-[#090d16]/40 backdrop-blur-sm sticky top-0 z-10">
+            
+            <div class="flex items-center space-x-3 min-w-0">
+                <button onclick="toggleSidebar()" class="md:hidden w-10 h-10 rounded-xl border border-slate-200/50 dark:border-slate-800/50 flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800">
+                    <i class="fa-solid fa-bars text-sm"></i>
+                </button>
+                <div class="min-w-0">
+                    <h2 id="active-session-title" class="font-outfit font-bold text-sm sm:text-base text-slate-900 dark:text-white truncate">New Chat</h2>
+                    <p id="chat-sub-status" class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Local similarity mode</p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-2.5">
+                <!-- Export Buttons -->
+                <button onclick="exportChat('txt')" class="px-2.5 py-1.5 rounded-lg border border-slate-200/50 dark:border-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800/50 text-[11px] font-semibold flex items-center space-x-1.5" title="Export as TXT">
+                    <i class="fa-solid fa-file-lines text-slate-400"></i>
+                    <span class="hidden sm:inline">TXT</span>
+                </button>
+                <button onclick="exportChat('pdf')" class="px-2.5 py-1.5 rounded-lg border border-slate-200/50 dark:border-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800/50 text-[11px] font-semibold flex items-center space-x-1.5" title="Export as PDF">
+                    <i class="fa-solid fa-file-pdf text-red-500"></i>
+                    <span class="hidden sm:inline">PDF</span>
+                </button>
+                <button onclick="clearCurrentChat()" class="px-2.5 py-1.5 rounded-lg border border-slate-200/50 dark:border-slate-800/50 hover:bg-rose-500/10 hover:border-rose-500/20 text-slate-500 hover:text-rose-500 text-[11px] font-semibold flex items-center space-x-1.5" title="Clear chat bubbles">
+                    <i class="fa-solid fa-eraser"></i>
+                    <span class="hidden sm:inline">Clear</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Chat messages view -->
+        <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6" id="chat-messages-container">
+            
+            <!-- Empty state illustration -->
+            <div id="chat-empty-state" class="h-full flex flex-col items-center justify-center text-center p-8">
+                <div class="w-16 h-16 rounded-2xl bg-brand-500/5 border border-brand-500/10 flex items-center justify-center text-brand-500 text-2xl mb-4 animate-float">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <h3 class="font-outfit font-bold text-base text-slate-800 dark:text-white mb-2">Welcome to Smart FAQ Assistant</h3>
+                <p class="text-xs text-slate-400 max-w-sm font-medium leading-relaxed">
+                    Ask me anything about Machine Learning, Artificial Intelligence, Python, NLP, Computer Vision, Generative AI, or Data Science!
+                </p>
+                
+                <!-- Quick Suggestion chips -->
+                <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-md w-full">
+                    <button onclick="fillQuery('What is Machine Learning?')" class="p-3 text-left rounded-xl border border-slate-200/60 dark:border-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800/40 text-xs font-semibold text-slate-600 dark:text-slate-400 flex items-center justify-between">
+                        <span>What is Machine Learning?</span>
+                        <i class="fa-solid fa-chevron-right text-3xs text-slate-400"></i>
+                    </button>
+                    <button onclick="fillQuery('What is the Turing Test?')" class="p-3 text-left rounded-xl border border-slate-200/60 dark:border-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800/40 text-xs font-semibold text-slate-600 dark:text-slate-400 flex items-center justify-between">
+                        <span>What is the Turing Test?</span>
+                        <i class="fa-solid fa-chevron-right text-3xs text-slate-400"></i>
+                    </button>
+                    <button onclick="fillQuery('Explain the difference between Stemming and Lemmatization')" class="p-3 text-left rounded-xl border border-slate-200/60 dark:border-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800/40 text-xs font-semibold text-slate-600 dark:text-slate-400 flex items-center justify-between">
+                        <span>Difference between Stemming & Lemmatization</span>
+                        <i class="fa-solid fa-chevron-right text-3xs text-slate-400"></i>
+                    </button>
+                    <button onclick="fillQuery('What is Generative AI?')" class="p-3 text-left rounded-xl border border-slate-200/60 dark:border-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800/40 text-xs font-semibold text-slate-600 dark:text-slate-400 flex items-center justify-between">
+                        <span>What is Generative AI?</span>
+                        <i class="fa-solid fa-chevron-right text-3xs text-slate-400"></i>
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Chat Input Form -->
+        <div class="p-4 sm:p-6 border-t border-slate-200/40 dark:border-slate-800/40 bg-white/40 dark:bg-[#090d16]/40 backdrop-blur-sm sticky bottom-0 z-10">
+            <form id="chat-form" onsubmit="submitQuery(event)" class="max-w-4xl mx-auto flex items-center space-x-3">
+                
+                <!-- Voice Actions -->
+                <div class="flex items-center space-x-1.5 shrink-0">
+                    <button type="button" id="mic-btn" onclick="toggleDictation()" class="w-11 h-11 rounded-xl border border-slate-200/50 dark:border-slate-800/50 flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 transition-colors" title="Speech to Text Input">
+                        <i class="fa-solid fa-microphone"></i>
+                    </button>
+                    <button type="button" id="speaker-btn" onclick="toggleTTS()" class="w-11 h-11 rounded-xl border border-slate-200/50 dark:border-slate-800/50 flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 transition-colors" title="Text to Speech Responses">
+                        <i class="fa-solid fa-volume-xmark"></i>
+                    </button>
+                </div>
+
+                <div class="flex-1 relative">
+                    <input id="chat-input" type="text" autocomplete="off" placeholder="Ask a question..." class="w-full pl-4 pr-12 py-3 rounded-xl bg-white dark:bg-[#0c1220] border border-slate-200/80 dark:border-slate-800/80 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-sm text-slate-850 dark:text-slate-100 shadow-sm transition-all">
+                    <button type="submit" class="absolute inset-y-1.5 right-1.5 w-8 h-8 rounded-lg bg-brand-600 hover:bg-brand-700 text-white flex items-center justify-center transform active:scale-95 transition-all">
+                        <i class="fa-solid fa-paper-plane text-xs"></i>
+                    </button>
+                </div>
+            </form>
+            <div class="text-center mt-3 text-[10px] text-slate-400 font-medium">
+                Smart FAQ Assistant can make errors. Verify important information.
+            </div>
+        </div>
+
+    </section>
+</div>
+
+<!-- Rename Dialog Prompt Modal -->
+<div id="rename-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 dark:bg-black/80 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-[#0c1220] rounded-2xl border border-slate-200 dark:border-slate-800/80 p-6 max-w-sm w-full shadow-2xl transform scale-95 transition-transform duration-300">
+        <h3 class="font-outfit font-bold text-base text-slate-950 dark:text-white mb-2">Rename Conversation</h3>
+        <p class="text-xs text-slate-400 mb-4 font-medium">Enter a new name for this conversation session.</p>
+        
+        <input id="rename-input" type="text" class="w-full px-4 py-2.5 text-xs rounded-xl bg-slate-100 dark:bg-slate-900 border-0 focus:ring-1 focus:ring-brand-500 text-slate-800 dark:text-slate-100 mb-4" placeholder="Enter title...">
+        
+        <div class="flex items-center justify-end space-x-2.5">
+            <button onclick="closeRenameModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 transition-colors">Cancel</button>
+            <button onclick="submitRename()" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold transition-all">Save Changes</button>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+{% if current_user.is_authenticated %}
+    <!-- Include jsPDF CDN for PDF export features -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+{% endif %}
+{% endblock %}

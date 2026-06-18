@@ -1,0 +1,227 @@
+{% extends 'base.html' %}
+
+{% block title %}FAQ Manager - Smart FAQ Assistant{% endblock %}
+
+{% block content %}
+<div class="flex-grow bg-slate-50/50 dark:bg-[#090d16] py-10 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto space-y-6">
+        
+        <!-- Header & KPIs -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+                <h1 class="font-outfit font-extrabold text-2xl sm:text-3xl text-slate-900 dark:text-white font-outfit">FAQ Management</h1>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Add, update, or import chatbot knowledge bases.</p>
+            </div>
+            
+            <div class="flex flex-wrap items-center gap-3">
+                <!-- Upload JSON form -->
+                <form action="{{ url_for('dashboard.upload_faqs') }}" method="POST" enctype="multipart/form-data" class="flex items-center">
+                    <label class="px-4 py-2.5 rounded-xl border border-dashed border-slate-350 dark:border-slate-800 hover:border-brand-500 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xs text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-brand-500 cursor-pointer flex items-center space-x-1.5 transition-colors">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <span>Import JSON</span>
+                        <input type="file" name="file" accept=".json" onchange="this.form.submit()" class="hidden">
+                    </label>
+                </form>
+
+                <!-- Download Export -->
+                <a href="{{ url_for('dashboard.download_faqs') }}" class="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800/80 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xs text-xs font-semibold text-slate-650 dark:text-slate-450 hover:text-brand-500 flex items-center space-x-1.5 transition-colors" title="Export database to JSON file">
+                    <i class="fa-solid fa-download"></i>
+                    <span>Export JSON</span>
+                </a>
+
+                <!-- Add FAQ trigger -->
+                <button onclick="openAddModal()" class="px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold shadow-md shadow-brand-500/10 hover:shadow-brand-500/20 flex items-center space-x-1.5 transition-all">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Add FAQ</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Metric summaries -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+            <div class="glass-card p-5 rounded-2xl border border-slate-200/50 dark:border-slate-800/50 flex items-center space-x-4">
+                <div class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-500 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-database"></i>
+                </div>
+                <div>
+                    <div class="text-[10px] uppercase font-bold text-slate-400">Total Entries</div>
+                    <div class="text-xl font-extrabold text-slate-900 dark:text-white mt-0.5">{{ total_count }}</div>
+                </div>
+            </div>
+            
+            <div class="glass-card p-5 rounded-2xl border border-slate-200/50 dark:border-slate-800/50 flex items-center space-x-4">
+                <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-tags"></i>
+                </div>
+                <div>
+                    <div class="text-[10px] uppercase font-bold text-slate-400">Core Categories</div>
+                    <div class="text-xl font-extrabold text-slate-900 dark:text-white mt-0.5">8 Topics</div>
+                </div>
+            </div>
+
+            <div class="glass-card p-5 rounded-2xl border border-slate-200/50 dark:border-slate-800/50 flex items-center space-x-4">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <div>
+                    <div class="text-[10px] uppercase font-bold text-slate-400">Status</div>
+                    <div class="text-xl font-extrabold text-emerald-500 mt-0.5">Fitted & Active</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search and List Table -->
+        <div class="glass-card rounded-2xl border border-slate-200/50 dark:border-slate-800/50 overflow-hidden shadow-sm">
+            
+            <!-- Table Controls -->
+            <div class="p-4 border-b border-slate-200/40 dark:border-slate-800/40 flex flex-col sm:flex-row items-center justify-between gap-3 bg-white/30 dark:bg-slate-900/10">
+                <form method="GET" action="{{ url_for('dashboard.home') }}" class="relative w-full sm:w-80">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+                        <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                    </span>
+                    <input type="text" name="search" value="{{ search_query }}" placeholder="Filter by question, answer, category..." class="w-full pl-9 pr-4 py-2 text-xs rounded-xl bg-white dark:bg-[#090d16] border border-slate-200/80 dark:border-slate-800/80 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-slate-700 dark:text-slate-350">
+                    {% if search_query %}
+                        <a href="{{ url_for('dashboard.home') }}" class="absolute inset-y-0 right-3 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                            <i class="fa-solid fa-circle-xmark text-xs"></i>
+                        </a>
+                    {% endif %}
+                </form>
+                
+                <div class="text-2xs text-slate-400 font-bold uppercase tracking-wider">
+                    Showing {{ faqs | length }} items
+                </div>
+            </div>
+
+            <!-- Table content -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-100/50 dark:bg-slate-900/40 text-[10px] font-bold uppercase tracking-wider text-slate-400 border-b border-slate-200/30 dark:border-slate-800/30">
+                            <th class="px-6 py-4 w-32">Category</th>
+                            <th class="px-6 py-4">Question & Answer</th>
+                            <th class="px-6 py-4 w-28 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200/30 dark:divide-slate-800/30 text-xs">
+                        {% if faqs %}
+                            {% for faq in faqs %}
+                                <tr class="hover:bg-slate-50/20 dark:hover:bg-slate-900/10 transition-colors text-slate-700 dark:text-slate-300">
+                                    <td class="px-6 py-4 align-top">
+                                        <span class="px-2.5 py-1.5 rounded-lg bg-indigo-500/5 border border-indigo-500/10 text-indigo-500 font-semibold text-[10px] tracking-wide inline-block">
+                                            {{ faq.category }}
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 space-y-1.5 max-w-xl">
+                                        <div class="font-semibold text-slate-900 dark:text-white">{{ faq.question }}</div>
+                                        <div class="text-slate-500 dark:text-slate-400 leading-relaxed font-medium line-clamp-2" title="{{ faq.answer }}">{{ faq.answer }}</div>
+                                    </td>
+                                    <td class="px-6 py-4 align-top text-right space-x-2">
+                                        <button onclick="openEditModal({{ faq.id }}, `{{ faq.question | escape }}`, `{{ faq.answer | escape }}`, `{{ faq.category | escape }}`)" class="p-2 border border-slate-200/40 dark:border-slate-800/40 hover:border-brand-500/30 rounded-lg hover:bg-brand-500/5 text-slate-400 hover:text-brand-500 transition-colors" title="Edit FAQ">
+                                            <i class="fa-solid fa-pen-to-square text-2xs"></i>
+                                        </button>
+                                        <button onclick="deleteFaq({{ faq.id }})" class="p-2 border border-slate-200/40 dark:border-slate-800/40 hover:border-rose-500/30 rounded-lg hover:bg-rose-500/5 text-slate-400 hover:text-rose-500 transition-colors" title="Delete FAQ">
+                                            <i class="fa-solid fa-trash-can text-2xs"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="3" class="px-6 py-16 text-center text-slate-400 font-medium">
+                                    <div class="text-2xl mb-3"><i class="fa-solid fa-folder-open"></i></div>
+                                    No FAQs found matching your query.
+                                </td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== ADD FAQ MODAL ==================== -->
+<div id="add-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 dark:bg-black/80 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-[#0c1220] rounded-2xl border border-slate-200 dark:border-slate-800/80 p-6 max-w-lg w-full shadow-2xl transform scale-95 transition-transform">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="font-outfit font-bold text-base text-slate-900 dark:text-white">Add New FAQ</h3>
+            <button onclick="closeAddModal()" class="text-slate-400 hover:text-slate-650 dark:hover:text-slate-250"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        
+        <div class="space-y-4">
+            <div>
+                <label class="block text-2xs uppercase tracking-wider font-bold text-slate-400 mb-1.5">Category</label>
+                <select id="add-category" class="w-full px-4 py-2.5 text-xs rounded-xl bg-slate-100 dark:bg-slate-900 border-0 focus:ring-1 focus:ring-brand-500 text-slate-700 dark:text-slate-350">
+                    <option value="Artificial Intelligence">Artificial Intelligence</option>
+                    <option value="Machine Learning">Machine Learning</option>
+                    <option value="Deep Learning">Deep Learning</option>
+                    <option value="Python Programming">Python Programming</option>
+                    <option value="Data Science">Data Science</option>
+                    <option value="NLP">NLP</option>
+                    <option value="Computer Vision">Computer Vision</option>
+                    <option value="Generative AI">Generative AI</option>
+                    <option value="General">General</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-2xs uppercase tracking-wider font-bold text-slate-400 mb-1.5">Question</label>
+                <input id="add-question" type="text" placeholder="What is the concept of..." class="w-full px-4 py-2.5 text-xs rounded-xl bg-slate-100 dark:bg-slate-900 border-0 focus:ring-1 focus:ring-brand-500 text-slate-800 dark:text-slate-100">
+            </div>
+            <div>
+                <label class="block text-2xs uppercase tracking-wider font-bold text-slate-400 mb-1.5">Answer</label>
+                <textarea id="add-answer" rows="4" placeholder="Enter corresponding chatbot answer..." class="w-full px-4 py-2.5 text-xs rounded-xl bg-slate-100 dark:bg-slate-900 border-0 focus:ring-1 focus:ring-brand-500 text-slate-800 dark:text-slate-100"></textarea>
+            </div>
+        </div>
+        
+        <div class="flex items-center justify-end space-x-2.5 mt-6">
+            <button onclick="closeAddModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 transition-colors">Cancel</button>
+            <button onclick="submitAddFaq()" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold transition-all">Add Entry</button>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== EDIT FAQ MODAL ==================== -->
+<div id="edit-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 dark:bg-black/80 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-[#0c1220] rounded-2xl border border-slate-200 dark:border-slate-800/80 p-6 max-w-lg w-full shadow-2xl transform scale-95 transition-transform">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="font-outfit font-bold text-base text-slate-900 dark:text-white">Modify FAQ Entry</h3>
+            <button onclick="closeEditModal()" class="text-slate-400 hover:text-slate-650 dark:hover:text-slate-250"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        
+        <input type="hidden" id="edit-id">
+        <div class="space-y-4">
+            <div>
+                <label class="block text-2xs uppercase tracking-wider font-bold text-slate-400 mb-1.5">Category</label>
+                <select id="edit-category" class="w-full px-4 py-2.5 text-xs rounded-xl bg-slate-100 dark:bg-slate-900 border-0 focus:ring-1 focus:ring-brand-500 text-slate-700 dark:text-slate-350">
+                    <option value="Artificial Intelligence">Artificial Intelligence</option>
+                    <option value="Machine Learning">Machine Learning</option>
+                    <option value="Deep Learning">Deep Learning</option>
+                    <option value="Python Programming">Python Programming</option>
+                    <option value="Data Science">Data Science</option>
+                    <option value="NLP">NLP</option>
+                    <option value="Computer Vision">Computer Vision</option>
+                    <option value="Generative AI">Generative AI</option>
+                    <option value="General">General</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-2xs uppercase tracking-wider font-bold text-slate-400 mb-1.5">Question</label>
+                <input id="edit-question" type="text" class="w-full px-4 py-2.5 text-xs rounded-xl bg-slate-100 dark:bg-slate-900 border-0 focus:ring-1 focus:ring-brand-500 text-slate-800 dark:text-slate-100">
+            </div>
+            <div>
+                <label class="block text-2xs uppercase tracking-wider font-bold text-slate-400 mb-1.5">Answer</label>
+                <textarea id="edit-answer" rows="4" class="w-full px-4 py-2.5 text-xs rounded-xl bg-slate-100 dark:bg-slate-900 border-0 focus:ring-1 focus:ring-brand-500 text-slate-800 dark:text-slate-100"></textarea>
+            </div>
+        </div>
+        
+        <div class="flex items-center justify-end space-x-2.5 mt-6">
+            <button onclick="closeEditModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 transition-colors">Cancel</button>
+            <button onclick="submitEditFaq()" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold transition-all">Save Changes</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}
