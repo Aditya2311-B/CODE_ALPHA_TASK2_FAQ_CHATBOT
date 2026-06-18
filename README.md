@@ -1,6 +1,7 @@
 # Smart FAQ Assistant
 
 An intelligent, production-ready SaaS FAQ Chatbot application built using **Python, Flask, NLTK, Scikit-learn, and Tailwind CSS**. It utilizes a modular Natural Language Processing (NLP) pipeline to clean text and calculates **Cosine Similarity on TF-IDF vectors** to match user questions with stored answers.
+<img width="2940" height="1912" alt="image" src="https://github.com/user-attachments/assets/708ea8d8-512f-43eb-81d2-334b930a4519" />
 
 ---
 
